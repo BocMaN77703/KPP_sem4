@@ -13,14 +13,12 @@ import org.springframework.http.ResponseEntity;
 
 
 @SpringBootTest
-class Labwork1ApplicationTests {
+class ApplicationTests {
 
     private final ComplexController calculationController = new ComplexController();
-    //    private final Calculation calculation = new Calculation();
     @Test
 
-    void testCalculateResultPlus_10() throws CalculationException {
-       // ResponseEntity(calculationController.complexCalculation("1", "0"));
+    void test1() throws CalculationException {
         Complex result = calculationController.complexCalculation("1", "0");
         Complex expected=new Complex(1.0,1.5707963267948966);
         assertEquals(expected, result);
