@@ -1,9 +1,5 @@
 package com.example.lab1_3.entities;
-import lombok.Getter;
-import lombok.Setter;
 public class Complex {
-    @Getter
-    @Setter
     private double module;
     private double phase;
 
