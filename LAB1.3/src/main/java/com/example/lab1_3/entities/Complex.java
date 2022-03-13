@@ -8,6 +8,15 @@ public class Complex {
         this.phase = phase;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        Complex test = (Complex) obj;
+        if (phase == test.phase && module == test.module) {
+            return true;
+        }
+        else return false;
+    }
+
     public double getModule() {
         return module;
     }

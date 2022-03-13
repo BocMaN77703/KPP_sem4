@@ -14,8 +14,8 @@ import org.springframework.http.ResponseEntity;
 @RestController
 public class ComplexController {
     @GetMapping("/complex")
-    ResponseEntity<ExceptionResponse> complexCalculation(@RequestParam(value="real", defaultValue="0") String real,
-                               @RequestParam(value="imaginable", defaultValue="0") String imaginable) throws CalculationException {
+    public Complex complexCalculation(@RequestParam(value="real", defaultValue="0") String real,
+                                                                @RequestParam(value="imaginable", defaultValue="0") String imaginable) throws CalculationException {
 
         if (real.matches("[-+]?\\d+") && imaginable.matches("[-+]?\\d+")) {
             int intReal = Integer.parseInt(real);
@@ -23,8 +23,7 @@ public class ComplexController {
             double module, phase;
             module = Math.sqrt(Math.pow(intReal, 2) + Math.pow(intImaginable, 2));
             phase = Math.atan2(intReal, intImaginable);
-            return new ResponseEntity(new Complex(module, phase), HttpStatus.BAD_REQUEST);
-
+            return new Complex(module, phase);
         }
         else throw new CalculationException("Wrong parameters");
     }
