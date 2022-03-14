@@ -16,15 +16,20 @@ public class ComplexController {
     @GetMapping("/complex")
     public Complex complexCalculation(@RequestParam(value="real", defaultValue="0") String real,
                                                                 @RequestParam(value="imaginable", defaultValue="0") String imaginable) throws CalculationException {
+        int intReal;
+        int intImaginable;
+        if (real.matches("[-+]?\\d+") ){
+            intReal = Integer.parseInt(real);
 
-        if (real.matches("[-+]?\\d+") && imaginable.matches("[-+]?\\d+")) {
-            int intReal = Integer.parseInt(real);
-            int intImaginable = Integer.parseInt(imaginable);
-            double module, phase;
-            module = Math.sqrt(Math.pow(intReal, 2) + Math.pow(intImaginable, 2));
-            phase = Math.atan2(intReal, intImaginable);
-            return new Complex(module, phase);
         }
-        else throw new CalculationException("Wrong parameters");
+        else throw new CalculationException("Wrong parameter: Real");
+        if(imaginable.matches("[-+]?\\d+")) {
+            intImaginable = Integer.parseInt(imaginable);
+        }
+        else throw new CalculationException("Wrong parameter: Imaginable");
+        double module, phase;
+        module = Math.sqrt(Math.pow(intReal, 2) + Math.pow(intImaginable, 2));
+        phase = Math.atan2(intReal, intImaginable);
+        return new Complex(module, phase);
     }
 }
