@@ -1,7 +1,7 @@
-package com.example.lab1_3.advice;
+package com.example.lab1_3.errorlogger;
 
 import com.example.lab1_3.exception.CalculationException;
-import com.example.lab1_3.response.ExceptionResponse;
+//import com.example.lab1_3.response.ExceptionResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,14 +12,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class LogErrors extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(CalculationException.class)
-    public ResponseEntity<ExceptionResponse> handleException(@NotNull CalculationException e) {
+    public ResponseEntity<Object> handleException(@NotNull CalculationException e) {
         logger.error("ERROR CODE 400", e);
-        return new ResponseEntity<>(new ExceptionResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ExceptionResponse> handleException(@NotNull Exception e) {
+    public ResponseEntity<Object> handleException(@NotNull Exception e) {
         logger.error("ERROR CODE 500", e);
-        return new ResponseEntity<>(new ExceptionResponse(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

@@ -8,6 +8,11 @@ public class Complex {
         this.phase = phase;
     }
 
+    public Complex(Complex a) {
+        this.module = a.module;
+        this.phase = a.phase;
+    }
+
     @Override
     public boolean equals(Object obj) {
         Complex test = (Complex) obj;
