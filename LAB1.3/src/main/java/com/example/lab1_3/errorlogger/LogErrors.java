@@ -1,7 +1,6 @@
 package com.example.lab1_3.errorlogger;
 
 import com.example.lab1_3.exception.CalculationException;
-//import com.example.lab1_3.response.ExceptionResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

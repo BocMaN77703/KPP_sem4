@@ -8,7 +8,6 @@ import java.util.Objects;
 
 public class Parameters {
 
-    // Method equals() overriding
     @Override
     public boolean equals(Object obj) {
         if (obj == this)
@@ -23,7 +22,6 @@ public class Parameters {
                 Objects.equals(secondValue, params.secondValue);
     }
 
-    // Method hashCode() overriding
     @Override
     public int hashCode() {
         return Objects.hash(firstValue, secondValue);

@@ -1,6 +1,5 @@
 package com.example.lab1_3.calculations;
 
-
 import com.example.lab1_3.SpringConfig;
 import com.example.lab1_3.cache.Cache;
 import com.example.lab1_3.logger.ProgramLogger;
@@ -21,26 +20,19 @@ public class Solution {
         var context = new AnnotationConfigApplicationContext(SpringConfig.class);
         cache = context.getBean("cache", Cache.class);
         context.close();
-
         this.parameters = params;
     }
 
     public void calculateRoot() {
-        // Trying to find root in cache
         var temp = cache.find(parameters);
         if (temp != null) {
             ProgramLogger.log(Level.WARN, "Value found in cache!");
             setRoot(temp);
-
             return;
         }
-
-        // If not found
         Complex tmp=new Complex(Math.sqrt(Math.pow(parameters.getFirstValue(), 2) + Math.pow(parameters.getSecondValue(), 2)),
                 Math.atan2(parameters.getFirstValue(), parameters.getSecondValue()));
-        //temp = parameters.getSecondValue() * parameters.getSecondValue()  * parameters.getFirstValue();
         setRoot(tmp);
-        // Adding { inputParams, root } to cache
         cache.add(parameters, root);
     }
 

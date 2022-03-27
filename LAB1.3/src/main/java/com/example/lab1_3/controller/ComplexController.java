@@ -10,7 +10,7 @@ import com.example.lab1_3.calculations.Solution;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import com.example.lab1_3.cache.Cache;
-import java.lang.Math;
+
 
 
 
@@ -30,15 +30,9 @@ public class ComplexController {
             intImaginable = Integer.parseInt(imaginable);
         }
         else throw new CalculationException("Wrong parameter: Imaginable");
-        double module, phase;
-        //module = Math.sqrt(Math.pow(intReal, 2) + Math.pow(intImaginable, 2));
-        //phase = Math.atan2(intReal, intImaginable);
-
         var solution = new Solution(new Parameters(intReal,intImaginable));
         solution.calculateRoot();
-
         return new Complex(solution.getRoot());
-        //return new ResponseEntity<>(solution.getRoot(), HttpStatus.OK);
     }
     @GetMapping("/cache")
     public ResponseEntity<String> printCache() {
