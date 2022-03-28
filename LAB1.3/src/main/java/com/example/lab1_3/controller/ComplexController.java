@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.lab1_3.entities.Complex;
-import com.example.lab1_3.calculations.Parameters;
-import com.example.lab1_3.calculations.Solution;
+import com.example.lab1_3.calculations.Param;
+import com.example.lab1_3.calculations.Calculation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import com.example.lab1_3.cache.Cache;
@@ -30,9 +30,9 @@ public class ComplexController {
             intImaginable = Integer.parseInt(imaginable);
         }
         else throw new CalculationException("Wrong parameter: Imaginable");
-        var solution = new Solution(new Parameters(intReal,intImaginable));
-        solution.calculateRoot();
-        return new Complex(solution.getRoot());
+        var solution = new Calculation(new Param(intReal,intImaginable));
+        solution.calculateComplex();
+        return new Complex(solution.getResult());
     }
     @GetMapping("/cache")
     public ResponseEntity<String> printCache() {

@@ -8,25 +8,25 @@ import org.jetbrains.annotations.Nullable;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import com.example.lab1_3.entities.Complex;
 
-public class Solution {
+public class Calculation {
 
     private final Cache cache;
 
-    private final Parameters parameters;
+    private final Param parameters;
 
     private Complex root;
 
-    public Solution(Parameters params) {
+    public Calculation(Param params) {
         var context = new AnnotationConfigApplicationContext(SpringConfig.class);
         cache = context.getBean("cache", Cache.class);
         context.close();
         this.parameters = params;
     }
 
-    public void calculateRoot() {
+    public void calculateComplex() {
         var temp = cache.find(parameters);
         if (temp != null) {
-            ProgramLogger.log(Level.WARN, "Value found in cache!");
+            ProgramLogger.log(Level.WARN, "Result is found in cache!");
             setRoot(temp);
             return;
         }
@@ -36,7 +36,7 @@ public class Solution {
         cache.add(parameters, root);
     }
 
-    public Complex getRoot() {
+    public Complex getResult() {
         return root;
     }
 

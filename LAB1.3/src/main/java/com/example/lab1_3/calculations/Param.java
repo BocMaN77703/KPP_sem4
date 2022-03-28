@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.lang.Nullable;
 import java.util.Objects;
 
-public class Parameters {
+public class Param {
 
     @Override
     public boolean equals(Object obj) {
@@ -16,7 +16,7 @@ public class Parameters {
         if (obj == null || obj.getClass() != this.getClass())
             return false;
 
-        Parameters params = (Parameters) obj;
+        Param params = (Param) obj;
 
         return  Objects.equals(firstValue,  params.firstValue)  &&
                 Objects.equals(secondValue, params.secondValue);
@@ -32,18 +32,18 @@ public class Parameters {
     private @Nullable Integer secondValue;
 
 
-    public Parameters(
+    public Param(
             @Nullable Integer firstValue,
             @Nullable Integer secondValue
     ) {
         if (firstValue == null && secondValue == null)
-            throw new IllegalArgumentException("No first and second values!");
+            throw new IllegalArgumentException("Values not found!");
 
         if (firstValue == null)
-            throw new IllegalArgumentException("No first value!");
+            throw new IllegalArgumentException("First value not found!");
 
         if (secondValue == null)
-            throw new IllegalArgumentException("No second value!");
+            throw new IllegalArgumentException("Second value not found!");
 
         this.firstValue  = firstValue;
         this.secondValue = secondValue;
@@ -62,10 +62,6 @@ public class Parameters {
         assert secondValue != null;
         return secondValue;
     }
-
-
-
-
 
     public void setFirstValue(@Nullable Integer firstValue) {
         this.firstValue = firstValue;
