@@ -10,17 +10,27 @@ import com.example.lab1_3.entities.Complex;
 
 public class Calculation {
 
-    private final Cache cache;
+    private Cache cache;
 
-    private final Param parameters;
+    private Param parameters;
 
     private Complex root;
+
+    public Calculation() {
+        var context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        cache = context.getBean("cache", Cache.class);
+        context.close();
+    }
 
     public Calculation(Param params) {
         var context = new AnnotationConfigApplicationContext(SpringConfig.class);
         cache = context.getBean("cache", Cache.class);
         context.close();
         this.parameters = params;
+    }
+
+    public void setParameters(Param params){
+        this.parameters=params;
     }
 
     public void calculateComplex() {
