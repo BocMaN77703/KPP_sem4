@@ -1,7 +1,6 @@
 package com.example.lab1_3.controller;
 
 import com.example.lab1_3.exception.CalculationException;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,14 +12,14 @@ import org.springframework.http.ResponseEntity;
 import com.example.lab1_3.cache.Cache;
 
 
-
-
 @RestController
 public class ComplexController {
     private Calculation calculation=new Calculation();
+    private MyCounter counter=new MyCounter();
     @GetMapping("/complex")
     public Complex complexCalculation(@RequestParam(value="real", defaultValue="0") String real,
                                                                 @RequestParam(value="imaginable", defaultValue="0") String imaginable) throws CalculationException {
+        counter.increaseCounter();
         int intReal;
         int intImaginable;
         if (real.matches("[-+]?\\d+") ){
@@ -31,7 +30,6 @@ public class ComplexController {
             intImaginable = Integer.parseInt(imaginable);
         }
         else throw new CalculationException("Wrong parameter: Imaginable");
-        //var solution = new Calculation(new Param(intReal,intImaginable));
         calculation.setParameters(new Param(intReal,intImaginable));
         calculation.calculateComplex();
         return new Complex(calculation.getResult());

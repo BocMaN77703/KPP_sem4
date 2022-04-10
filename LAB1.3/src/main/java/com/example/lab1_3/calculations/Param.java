@@ -1,8 +1,5 @@
 package com.example.lab1_3.calculations;
 
-
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.lang.Nullable;
 import java.util.Objects;
 
@@ -49,15 +46,11 @@ public class Param {
         this.secondValue = secondValue;
     }
 
-    @NotNull
-    @Contract(pure = true)
     public Integer getFirstValue() {
         assert firstValue != null;
         return firstValue;
     }
 
-    @NotNull
-    @Contract(pure = true)
     public Integer getSecondValue() {
         assert secondValue != null;
         return secondValue;
