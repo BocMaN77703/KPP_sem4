@@ -1,9 +1,8 @@
 package com.example.lab1_3.controller;
 
 import com.example.lab1_3.exception.CalculationException;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 import com.example.lab1_3.entities.Complex;
 import com.example.lab1_3.calculations.Param;
 import com.example.lab1_3.calculations.Calculation;
@@ -34,8 +33,14 @@ public class ComplexController {
         calculation.calculateComplex();
         return new Complex(calculation.getResult());
     }
+
     @GetMapping("/cache")
     public ResponseEntity<String> printCache() {
         return new ResponseEntity<>(Cache.getStaticStringCache(), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/calculation", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity alternativeCalculation(@RequestBody String[] array) {
+        return new ResponseEntity<>(calculation.averageOfPositive(array), HttpStatus.OK);
     }
 }

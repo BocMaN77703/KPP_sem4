@@ -8,6 +8,10 @@ import org.jetbrains.annotations.Nullable;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import com.example.lab1_3.entities.Complex;
 
+import java.util.OptionalDouble;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
 public class Calculation {
 
     private Cache cache;
@@ -44,6 +48,11 @@ public class Calculation {
                 Math.atan2(parameters.getFirstValue(), parameters.getSecondValue()));
         setRoot(tmp);
         cache.add(parameters, root);
+    }
+
+    public OptionalDouble averageOfPositive(String[] arr){
+        IntStream stream = Stream.of(arr).mapToInt(Integer::parseInt);
+        return stream.filter(x->x>0).average();
     }
 
     public Complex getResult() {
