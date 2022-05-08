@@ -13,10 +13,13 @@ public class MyCounter {
         counter++;
         ProgramLogger.log(Level.INFO, "Counter has been increased. New value is "+counter+".");
     }
-
+    synchronized public int getValue() {
+        return counter;
+    }
     @GetMapping("/counter")
     synchronized public String showCalls() {
         return "Number of calls: "+counter;
     }
+
 }
 
