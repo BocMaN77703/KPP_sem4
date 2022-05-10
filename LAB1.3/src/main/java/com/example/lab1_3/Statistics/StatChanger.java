@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Service
 public class StatChanger {
     private static List<Integer> roots = new ArrayList<>();
-    private Statistics stats;
+    private Statistics stats=new Statistics();
     private static boolean shouldBeRecalculated = true;
     @Autowired
     public void setStats(Statistics stats) {

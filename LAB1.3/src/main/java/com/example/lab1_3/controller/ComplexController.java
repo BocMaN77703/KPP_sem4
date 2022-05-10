@@ -1,5 +1,7 @@
 package com.example.lab1_3.controller;
 
+import com.example.lab1_3.Statistics.StatChanger;
+import com.example.lab1_3.Statistics.Statistics;
 import com.example.lab1_3.exception.CalculationException;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -13,22 +15,33 @@ import com.example.lab1_3.cache.Cache;
 
 @RestController
 public class ComplexController {
+   // private Statistics statistics=new Statistics();
     private Calculation calculation=new Calculation();
     private MyCounter counter=new MyCounter();
+    private StatChanger statChanger=new StatChanger();
     @GetMapping("/complex")
     public Complex complexCalculation(@RequestParam(value="real", defaultValue="0") String real,
                                                                 @RequestParam(value="imaginable", defaultValue="0") String imaginable) throws CalculationException {
         counter.increaseCounter();
+        statChanger.increaseTotalRequests();
         int intReal;
         int intImaginable;
         if (real.matches("[-+]?\\d+") ){
             intReal = Integer.parseInt(real);
         }
-        else throw new CalculationException("Wrong parameter: Real");
+        else
+        {
+            statChanger.increaseWrongRequests();
+            throw new CalculationException("Wrong parameter: Real");
+        }
         if(imaginable.matches("[-+]?\\d+")) {
             intImaginable = Integer.parseInt(imaginable);
         }
-        else throw new CalculationException("Wrong parameter: Imaginable");
+        else
+        {
+            statChanger.increaseWrongRequests();
+            throw new CalculationException("Wrong parameter: Imaginable");
+        }
         calculation.setParameters(new Param(intReal,intImaginable));
         calculation.calculateComplex();
         return new Complex(calculation.getResult());
